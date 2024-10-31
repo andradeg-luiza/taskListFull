@@ -88,3 +88,4 @@ Desenvolva um sistema web para cadastro de Tarefas e publique a aplicação disp
 
 ### **Ferramentas**:
 * Node 20.17.0
+* Docker version 27.2.0, build 3ab4256
