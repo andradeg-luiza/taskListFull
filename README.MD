@@ -82,7 +82,7 @@ Desenvolva um sistema web para cadastro de Tarefas e publique a aplicação disp
 * A implementação pode ser feita de uma das duas formas abaixo (escolha uma, se possível, as duas): 
 
 * Com o uso do mouse, o usuário arrasta uma tarefa para cima ou para baixo, soltando na posição desejada. Estilo drag-and-drop ou em cada linha (registro) deve ter dois botões, uma para "subir" a tarefa na ordem de apresentação e outro para "descer". Obviamente a primeira tarefa não poderá "subir" e nem a última poderá "descer". 
-* 
+ 
 ---
 ## Informações Adicionais
 
