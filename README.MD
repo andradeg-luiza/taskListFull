@@ -90,3 +90,10 @@ Desenvolva um sistema web para cadastro de Tarefas e publique a aplicação disp
 
 
 ### **Dependencias**:
+* dotenv: 16.4.5
+* express: 4.21.1
+* mysql2: 3.11.3
+* @eslint/js: 9.14.0
+* eslint: 9.14.0
+* globals: 15.12.0
+* nodemon: 3.1.7
