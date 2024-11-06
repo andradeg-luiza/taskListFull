@@ -1,8 +1,7 @@
 ## TaskListFull
-**TBD**
-**The functional documentation will be added to the WIKI, and the project documentation will be added to the Readme.**
+**(TBD) The functional documentation will be added to the WIKI, and the project documentation will be added to the Readme.**
 
-### Directory Structure
+### Directory Architecture
 
 | **Structure** | **Description** |
 | ----------------------- | --------- |
