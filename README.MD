@@ -1,7 +1,10 @@
 ## TaskListFull
+**TBD**
 **The functional documentation will be added to the WIKI, and the project documentation will be added to the Readme.**
 
-| **Directory Arquitecture** | **Description** |
+### Directory Structure
+
+| **Structure** | **Description** |
 | ----------------------- | --------- |
 | `/ taskListFull`           | `root of the project` |
 | `/ - / backend`                | `root of the backend` |
