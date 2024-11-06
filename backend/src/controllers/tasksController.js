@@ -10,8 +10,16 @@ const createTask = async (request, response) => {
     return response.status(201).json(createdTask);
 };
 
+const deleteTask = async (request, response) => {
+    const { id } = request.params;
+    await tasksModel.deleteTask(id);
+    return response.status(204).json();
+};
+
+//deleteTask
 
 module.exports ={
     getAll,
-    createTask
+    createTask,
+    deleteTask
 };
