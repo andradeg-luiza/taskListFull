@@ -1,4 +1,4 @@
-const validadeTitle = (request, response, next) => {
+const validadeFieldTitle = (request, response, next) => {
     const { body } = request;
 
     if (body.title === undefined) {
@@ -10,7 +10,7 @@ const validadeTitle = (request, response, next) => {
     next();
 };
 
-const validadeDeadline = (request, response, next) => {
+const validadeFieldDeadline = (request, response, next) => {
     const { body } = request;
 
     if (body.deadline === undefined) {
@@ -22,8 +22,21 @@ const validadeDeadline = (request, response, next) => {
     next();
 };
 
+const validadeFieldStatus = (request, response, next) => {
+    const { body } = request;
+
+    if (body.status === undefined) {
+        return response.status(400).json({ message: 'The field "status" is required' });
+    };
+    if (body.status === "") {
+        return response.status(400).json({ message: 'Status cannot be empty' });
+    };
+    next();
+};
+
 
 module.exports = {
-    validadeTitle,
-    validadeDeadline
+    validadeFieldTitle,
+    validadeFieldDeadline,
+    validadeFieldStatus
 };
