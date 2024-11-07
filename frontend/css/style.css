@@ -29,7 +29,7 @@ main {
 
 #id-input-task {
     width: 100%;
-    flex: 1;
+    flex: 65%;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -40,7 +40,7 @@ main {
 
 #id-input-deadline {
     width: 100%;
-    flex: 1;
+    flex: 25%;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -51,7 +51,7 @@ main {
 
 #id-btn-add {
     background-color: #98F5FF;
-    height: 50px;
+    height: 56px;
     width: 50px;
     border: none;
     border-radius: 5px;
