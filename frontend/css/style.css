@@ -84,7 +84,7 @@ tr:nth-child(even) {
     background-color: #F5F5F5;
 }
 
-#id-select-status {
+select {
     width: 100%;
     border: none;
     padding: 10px;
@@ -94,7 +94,7 @@ tr:nth-child(even) {
     background-color: #EBEBEB;
 }
 
-#id-select-status:hover {
+select:hover {
     background-color: #DDD;
 }
 
