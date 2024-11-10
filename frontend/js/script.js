@@ -1,4 +1,3 @@
-//TODO tudo que for deadline será tratado calendário, no momento só aceita texto
 //TODO alterar os títulos da tabela para poder filtrar no futuro ou reordenar por ID
 //TODO adicionar mensagem de erro do backend quando os campos tarefa e prazo estiverem vazio
 
@@ -77,7 +76,7 @@ const createRow = (task) => {
     const tr = createElement('tr');
     const tdID = createElement('td', id);
     const tdTitle = createElement('td', title);
-    const tdDeadline = createElement('td', deadline); // TODO ajuste deadline conforme descrito acima
+    const tdDeadline = createElement('td', deadline);
     const tdCreatedAt = createElement('td', formatDate(create_at));
     const tdStatus = createElement('td');
     const tdActions = createElement('td');
