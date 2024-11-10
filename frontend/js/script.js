@@ -1,24 +1,34 @@
-//TODO alterar os títulos da tabela para poder filtrar no futuro ou reordenar por ID
 //TODO adicionar mensagem de erro do backend quando os campos tarefa e prazo estiverem vazio
 
 const tbody = document.querySelector('tbody');
 const addForm = document.querySelector('.add-form');
 const inputTask = document.querySelector('.input-task');
 const inputDeadline = document.querySelector('.input-deadline');
-
+const titleHeader = document.getElementById('title-header');
+const deadlineHeader = document.getElementById('deadline-header');
 const API_URL = 'http://localhost:3333/tasks';
+
+let sortOrder = {
+    title: 'asc',
+    deadline: 'asc',
+};
 
 const fetchTasks = async () => {
     const response = await fetch(API_URL);
     return response.json();
 };
 
+const resetInputFields = () => {
+    inputTask.value = '';
+    inputDeadline.value = '';
+};
+
 const addTask = async (event) => {
     event.preventDefault();
 
-    const task = { 
-        title: inputTask.value, 
-        deadline: inputDeadline.value 
+    const task = {
+        title: inputTask.value,
+        deadline: inputDeadline.value,
     };
 
     await fetch(API_URL, {
@@ -40,7 +50,7 @@ const updateTask = async ({ id, title, status }) => {
     await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, status })
+        body: JSON.stringify({ title, status }),
     });
     loadTasks();
 };
@@ -74,13 +84,12 @@ const createRow = (task) => {
     const { id, title, deadline, status, create_at } = task;
 
     const tr = createElement('tr');
-    const tdID = createElement('td', id);
     const tdTitle = createElement('td', title);
     const tdDeadline = createElement('td', deadline);
     const tdCreatedAt = createElement('td', formatDate(create_at));
     const tdStatus = createElement('td');
     const tdActions = createElement('td');
-    
+
     const select = createSelect(status);
     select.addEventListener('change', ({ target }) => updateTask({ ...task, status: target.value }));
 
@@ -110,7 +119,6 @@ const createRow = (task) => {
     tdActions.appendChild(editButton);
     tdActions.appendChild(deleteButton);
 
-    tr.appendChild(tdID);
     tr.appendChild(tdTitle);
     tr.appendChild(tdDeadline);
     tr.appendChild(tdCreatedAt);
@@ -129,10 +137,43 @@ const loadTasks = async () => {
     });
 };
 
-const resetInputFields = () => {
-    inputTask.value = '';
-    inputDeadline.value = '';
+const sortTable = (columnIndex, type, order) => {
+    const rows = Array.from(tbody.rows);
+    rows.sort((rowA, rowB) => {
+        const cellA = rowA.cells[columnIndex].innerText;
+        const cellB = rowB.cells[columnIndex].innerText;
+
+        if (type === 'string') {
+            return order === 'asc' ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        } else if (type === 'date') {
+            const dateA = new Date(cellA.split('/').reverse().join('-'));
+            const dateB = new Date(cellB.split('/').reverse().join('-'));
+            return order === 'asc' ? dateA - dateB : dateB - dateA;
+        }
+        return 0;
+    });
+
+    tbody.innerHTML = '';
+    tbody.append(...rows);
 };
 
-addForm.addEventListener('submit', addTask);
+const toggleSortOrder = (headerElement, columnIndex, type) => {
+    const currentOrder = sortOrder[columnIndex === 1 ? 'title' : 'deadline'];
+
+    if (currentOrder === 'asc') {
+        sortOrder[columnIndex === 1 ? 'title' : 'deadline'] = 'desc';
+        headerElement.classList.replace('asc', 'desc');
+    } else {
+        sortOrder[columnIndex === 1 ? 'title' : 'deadline'] = 'asc';
+        headerElement.classList.replace('desc', 'asc');
+    }
+
+    sortTable(columnIndex, type, sortOrder[columnIndex === 1 ? 'title' : 'deadline']);
+};
+
+titleHeader.addEventListener('click', () => toggleSortOrder(titleHeader, 1, 'string'));
+deadlineHeader.addEventListener('click', () => toggleSortOrder(deadlineHeader, 2, 'date'));
+
 loadTasks();
+
+addForm.addEventListener('submit', addTask);

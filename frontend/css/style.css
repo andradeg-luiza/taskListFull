@@ -17,7 +17,7 @@ main {
     padding: 20px;
     width: 90%;
     margin: 40px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3 );
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .add-form {
@@ -27,9 +27,7 @@ main {
     width: 100%;
 }
 
-#id-input-task {
-    width: 100%;
-    flex: 65%;
+#id-input-task, #id-input-deadline {
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -38,15 +36,14 @@ main {
     font-weight: 600;
 }
 
-#id-input-deadline {
+#id-input-task {
+    flex: 65%;
     width: 100%;
+}
+
+#id-input-deadline {
     flex: 25%;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    font-size: 1rem;
-    font-weight: 600;
+    width: 100%;
 }
 
 #id-btn-add {
@@ -84,6 +81,20 @@ tr:nth-child(even) {
     background-color: #F5F5F5;
 }
 
+th {
+    position: relative;
+    padding: 10px;
+    background-color: #f4f4f4;
+}
+
+#title-header, #deadline-header {
+    cursor: pointer;
+}
+
+#title-header:hover, #deadline-header:hover {
+    background-color: #e9ecef;
+}
+
 select {
     width: 100%;
     border: none;
@@ -115,5 +126,5 @@ select:hover {
 }
 
 .btn-action:nth-child(2) {
-    background-color: rgba(237, 42, 42, 0.9 );
+    background-color: rgba(237, 42, 42, 0.9);
 }
