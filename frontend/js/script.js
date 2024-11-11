@@ -6,10 +6,7 @@ const titleHeader = document.getElementById('title-header');
 const deadlineHeader = document.getElementById('deadline-header');
 const API_URL = 'http://localhost:3333/tasks';
 
-let sortOrder = {
-    title: 'asc',
-    deadline: 'asc',
-};
+let sortOrder = { title: 'asc', deadline: 'asc' };
 
 const fetchTasks = async () => {
     const response = await fetch(API_URL);
@@ -24,20 +21,19 @@ const resetInputFields = () => {
 const addTask = async (event) => {
     event.preventDefault();
 
-    if (inputTask.value.trim() === '') {
-        alert('Por favor, preencha o campo de Tarefa antes de adicionar.');
+    if (!inputTask.value.trim() || !inputDeadline.value.trim()) {
+        alert('Por favor, preencha todos os campos antes de adicionar.');
+        inputTask.value = '';
+        inputDeadline.value = '';
         return;
     }
 
-    if (inputDeadline.value.trim() === '') {
-        alert('Por favor, preencha a data antes de adicionar.');
+    if (!confirm('Você tem certeza que deseja adicionar esta tarefa?')) {
+        resetInputFields();
         return;
     }
 
-    const task = {
-        title: inputTask.value,
-        deadline: inputDeadline.value,
-    };
+    const task = { title: inputTask.value, deadline: inputDeadline.value };
 
     await fetch(API_URL, {
         method: 'POST',
@@ -45,11 +41,12 @@ const addTask = async (event) => {
         body: JSON.stringify(task),
     });
 
-    loadTasks();
     resetInputFields();
+    loadTasks();
 };
 
 const deleteTask = async (id) => {
+    if (!confirm('Você tem certeza que deseja excluir esta tarefa?')) return;
     await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
     loadTasks();
 };
@@ -111,12 +108,17 @@ const createRow = (task) => {
 
     editForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        updateTask({ id, title: editInput.value, status });
+        if (confirm('Você tem certeza que deseja salvar as alterações?')) {
+            updateTask({ id, title: editInput.value, status });
+        } else {
+            tdTitle.innerText = title;
+        }
     });
 
     editButton.addEventListener('click', () => {
         tdTitle.innerText = '';
         tdTitle.appendChild(editForm);
+        editInput.value = title;
     });
 
     editButton.classList.add('btn-action');
@@ -166,22 +168,15 @@ const sortTable = (columnIndex, type, order) => {
 };
 
 const toggleSortOrder = (headerElement, columnIndex, type) => {
-    const currentOrder = sortOrder[columnIndex === 1 ? 'title' : 'deadline'];
-
-    if (currentOrder === 'asc') {
-        sortOrder[columnIndex === 1 ? 'title' : 'deadline'] = 'desc';
-        headerElement.classList.replace('asc', 'desc');
-    } else {
-        sortOrder[columnIndex === 1 ? 'title' : 'deadline'] = 'asc';
-        headerElement.classList.replace('desc', 'asc');
-    }
-
-    sortTable(columnIndex, type, sortOrder[columnIndex === 1 ? 'title' : 'deadline']);
+    const columnKey = columnIndex === 0 ? 'title' : 'deadline';
+    const currentOrder = sortOrder[columnKey];
+    sortOrder[columnKey] = currentOrder === 'asc' ? 'desc' : 'asc';
+    headerElement.classList.replace(currentOrder === 'asc' ? 'asc' : 'desc', currentOrder === 'asc' ? 'desc' : 'asc');
+    sortTable(columnIndex, type, sortOrder[columnKey]);
 };
 
-titleHeader.addEventListener('click', () => toggleSortOrder(titleHeader, 1, 'string'));
-deadlineHeader.addEventListener('click', () => toggleSortOrder(deadlineHeader, 2, 'date'));
+titleHeader.addEventListener('click', () => toggleSortOrder(titleHeader, 0, 'string'));
+deadlineHeader.addEventListener('click', () => toggleSortOrder(deadlineHeader, 1, 'date'));
 
 loadTasks();
-
 addForm.addEventListener('submit', addTask);
