@@ -1,5 +1,3 @@
-//TODO adicionar mensagem de erro do backend quando os campos tarefa e prazo estiverem vazio
-
 const tbody = document.querySelector('tbody');
 const addForm = document.querySelector('.add-form');
 const inputTask = document.querySelector('.input-task');
@@ -25,6 +23,16 @@ const resetInputFields = () => {
 
 const addTask = async (event) => {
     event.preventDefault();
+
+    if (inputTask.value.trim() === '') {
+        alert('Por favor, preencha o campo de Tarefa antes de adicionar.');
+        return;
+    }
+
+    if (inputDeadline.value.trim() === '') {
+        alert('Por favor, preencha a data antes de adicionar.');
+        return;
+    }
 
     const task = {
         title: inputTask.value,
