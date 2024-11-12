@@ -30,13 +30,19 @@
 | `/ - /README.MD`             | `documentation and instructions for the project` |  
 
 ### **Development tools**:
-* JavaScript ECMAScript (ES2014)
-* CSS 3
-* HTML 5
-* Express 4.21.1
-* Mysql2 3.11.3
+#### Backend
+* ![NodeJS](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white) 
+* ![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white) 
 
-### **Dependencies**:
+#### Frontend
+* ![HTML](https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white) 
+* ![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3&logoColor=white) 
+* ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) 
+
+#### Database
+* ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) 
+
+#### **Dependencies**:
 * dotenv: 16.4.5
 * @eslint/js: 9.14.0
 * eslint: 9.14.0
